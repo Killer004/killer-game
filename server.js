@@ -18,7 +18,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'fallback_dev_secret_change_in_prod
 app.use(helmet({ contentSecurityPolicy: false })); // CSP отключаем — canvas игра
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
 
 // Rate limiting — защита от брутфорса
 const authLimiter = rateLimit({
@@ -324,7 +324,7 @@ app.get('/api/leaderboard', (req, res) => {
 
 // ====== ФРОНТЕНД — все остальные пути отдают игру ======
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'game.html'));
+  res.sendFile(path.join(__dirname, 'игра.html'));
 });
 
 // ====== СТАРТ ======
